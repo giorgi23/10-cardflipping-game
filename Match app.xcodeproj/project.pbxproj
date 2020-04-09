@@ -15,7 +15,7 @@
 		3FB75993243A71040024F8DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FB75991243A71040024F8DE /* LaunchScreen.storyboard */; };
 		3FB7599B243B6B540024F8DE /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB7599A243B6B540024F8DE /* CardModel.swift */; };
 		3FB7599D243B6C6F0024F8DE /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB7599C243B6C6F0024F8DE /* Card.swift */; };
-		3FB7599F243B72A10024F8DE /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB7599E243B72A10024F8DE /* CollectionViewCell.swift */; };
+		3FB7599F243B72A10024F8DE /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB7599E243B72A10024F8DE /* MyCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,7 @@
 		3FB75994243A71040024F8DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FB7599A243B6B540024F8DE /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		3FB7599C243B6C6F0024F8DE /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
-		3FB7599E243B72A10024F8DE /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		3FB7599E243B72A10024F8DE /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,9 +64,9 @@
 			children = (
 				3FB75986243A70FA0024F8DE /* AppDelegate.swift */,
 				3FB75988243A70FA0024F8DE /* SceneDelegate.swift */,
-				3FB7599A243B6B540024F8DE /* CardModel.swift */,
-				3FB7599E243B72A10024F8DE /* CollectionViewCell.swift */,
+				3FB7599E243B72A10024F8DE /* MyCollectionViewCell.swift */,
 				3FB7599C243B6C6F0024F8DE /* Card.swift */,
+				3FB7599A243B6B540024F8DE /* CardModel.swift */,
 				3FB7598A243A70FA0024F8DE /* ViewController.swift */,
 				3FB7598C243A70FA0024F8DE /* Main.storyboard */,
 				3FB7598F243A71040024F8DE /* Assets.xcassets */,
@@ -149,7 +149,7 @@
 			files = (
 				3FB7598B243A70FA0024F8DE /* ViewController.swift in Sources */,
 				3FB7599B243B6B540024F8DE /* CardModel.swift in Sources */,
-				3FB7599F243B72A10024F8DE /* CollectionViewCell.swift in Sources */,
+				3FB7599F243B72A10024F8DE /* MyCollectionViewCell.swift in Sources */,
 				3FB7599D243B6C6F0024F8DE /* Card.swift in Sources */,
 				3FB75987243A70FA0024F8DE /* AppDelegate.swift in Sources */,
 				3FB75989243A70FA0024F8DE /* SceneDelegate.swift in Sources */,

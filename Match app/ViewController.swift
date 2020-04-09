@@ -31,12 +31,35 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as! CollectionViewCell
+        //Get a collectionViewCell object
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as! MyCollectionViewCell
+        
+        //Get the card that the collection view is trying to display and set it
+        cell.setCard(cardArray[indexPath.row])
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+       let cell = collectionView.cellForItem(at: indexPath) as! MyCollectionViewCell
+        
+        let card = cardArray[indexPath.row]
+        
+        if card.isFlipped == false {
+            
+            //flip the cell
+            cell.flip()
+            card.isFlipped = true
+            
+        } else {
+           
+            cell.flipBack()
+            
+            card.isFlipped = false
+        }
+        
+        
         
     }
 
