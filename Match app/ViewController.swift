@@ -34,6 +34,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         RunLoop.main.add(timer!, forMode: .common)
     }
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        SoundManager.playSound(.shuffle)
+    }
+    
     //MARK: - Timer Methods
     
     @objc func timerElapsed() {
@@ -77,6 +82,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        
        let selectedCell = collectionView.cellForItem(at: indexPath) as! MyCollectionViewCell
         
         let selectedCard = cardArray[indexPath.row]
@@ -85,6 +91,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             //flip the cell
             selectedCell.flip()
+            
+            SoundManager.playSound(.flip)
+            
             selectedCard.isFlipped = true
             
             //determining if it's the first card that the user flipped or the second
@@ -123,6 +132,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         if cardOne.imageName == cardTwo.imageName {
             
+            SoundManager.playSound(.match)
+            
             cardOne.isMatched = true
             cardTwo.isMatched = true
             
@@ -132,12 +143,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
         } else {
             
+            SoundManager.playSound(.nomatch)
             cardOne.isFlipped = false
             cardTwo.isFlipped = false
             
             cardOneCell?.flipBack()
             cardTwoCell?.flipBack()
-            
             
         }
         
