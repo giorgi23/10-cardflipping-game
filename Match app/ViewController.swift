@@ -15,6 +15,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     var model = CardModel()
     var cardArray = [Card]()
+    
+    var firstFlippedCardIndex:IndexPath?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,32 +36,79 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         //Get a collectionViewCell object
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as! MyCollectionViewCell
         
-        //Get the card that the collection view is trying to display and set it
-        cell.setCard(cardArray[indexPath.row])
+        //Get the card that the collection view is trying to display
+        let cardTodisplay = cardArray[indexPath.row]
+        
+        //Set it
+        cell.setCard(cardTodisplay)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-       let cell = collectionView.cellForItem(at: indexPath) as! MyCollectionViewCell
+       let selectedCell = collectionView.cellForItem(at: indexPath) as! MyCollectionViewCell
         
-        let card = cardArray[indexPath.row]
+        let selectedCard = cardArray[indexPath.row]
         
-        if card.isFlipped == false {
+        if selectedCard.isFlipped == false && selectedCard.isMatched == false {
             
             //flip the cell
-            cell.flip()
-            card.isFlipped = true
+            selectedCell.flip()
+            selectedCard.isFlipped = true
             
-        } else {
-           
-            cell.flipBack()
+            //determining if it's the first card that the user flipped or the second
+            if firstFlippedCardIndex == nil {
+                
+                //this is the first card flipped
+                firstFlippedCardIndex = indexPath
+                
+            } else {
+                
+                //this is the second card being flipped
+                checkForMatches(indexPath)
+                
+                // TODO: store the name of the selected card ifthe first flipped was false
+            }
             
-            card.isFlipped = false
+            
         }
         
         
+        
+    }
+    
+    // MARK: - Game logic Methods
+    
+    func checkForMatches (_ secondFlippedCardIndex:IndexPath) {
+        
+        
+        let cardOneCell = collectionView.cellForItem(at: firstFlippedCardIndex!) as? MyCollectionViewCell
+        
+        let cardTwoCell = collectionView.cellForItem(at: secondFlippedCardIndex) as? MyCollectionViewCell
+        
+        let cardOne = cardArray[firstFlippedCardIndex!.row]
+        let cardTwo = cardArray[secondFlippedCardIndex.row]
+        
+        
+        if cardOne.imageName == cardTwo.imageName {
+            
+            cardOne.isMatched = true
+            cardTwo.isMatched = true
+            
+            cardOneCell?.remove()
+            cardTwoCell?.remove()
+            
+        } else {
+            
+            cardOne.isFlipped = false
+            cardTwo.isFlipped = false
+            
+            cardOneCell?.flipBack()
+            cardTwoCell?.flipBack()
+        }
+        
+        firstFlippedCardIndex = nil
         
     }
 

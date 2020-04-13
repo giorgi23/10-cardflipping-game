@@ -64,10 +64,10 @@
 			children = (
 				3FB75986243A70FA0024F8DE /* AppDelegate.swift */,
 				3FB75988243A70FA0024F8DE /* SceneDelegate.swift */,
+				3FB7598A243A70FA0024F8DE /* ViewController.swift */,
 				3FB7599E243B72A10024F8DE /* MyCollectionViewCell.swift */,
 				3FB7599C243B6C6F0024F8DE /* Card.swift */,
 				3FB7599A243B6B540024F8DE /* CardModel.swift */,
-				3FB7598A243A70FA0024F8DE /* ViewController.swift */,
 				3FB7598C243A70FA0024F8DE /* Main.storyboard */,
 				3FB7598F243A71040024F8DE /* Assets.xcassets */,
 				3FB75991243A71040024F8DE /* LaunchScreen.storyboard */,
