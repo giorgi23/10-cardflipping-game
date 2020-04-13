@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
+    @IBOutlet weak var timerLabel: UILabel!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -17,12 +18,41 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var cardArray = [Card]()
     
     var firstFlippedCardIndex:IndexPath?
+    
+    var timer:Timer?
+    var miliseconds:Float = 100000 // 100 seconds
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         cardArray = model.getCards()
+        
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(timerElapsed), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer!, forMode: .common)
+    }
+    
+    //MARK: - Timer Methods
+    
+    @objc func timerElapsed() {
+        
+        miliseconds -= 1
+        
+        //convert to seconds
+        let seconds = String(format: "%.2f", miliseconds/1000)
+        
+        timerLabel.text = "Time Remaining: \(seconds)"
+        
+        if miliseconds <= 0 {
+            timer?.invalidate()
+            
+            timerLabel.textColor = UIColor.red
+            
+            checkGameEnded()
+        }
+        
     }
     
     //MARK: - Collection view methods
@@ -98,6 +128,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             cardOneCell?.remove()
             cardTwoCell?.remove()
+            checkGameEnded()
             
         } else {
             
@@ -106,10 +137,62 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             cardOneCell?.flipBack()
             cardTwoCell?.flipBack()
+            
+            
         }
         
         firstFlippedCardIndex = nil
         
+    }
+    
+    func checkGameEnded() {
+        
+        //find out if any cards are unmatched
+        var isWon = true
+        
+        
+        for card in cardArray {
+            if card.isMatched == false {
+                isWon = false
+                break
+            }
+            
+        }
+        
+        //if not, user won, stop timer
+        if isWon == true {
+            
+            timer?.invalidate()
+
+            
+            
+            showAlert("Congrats", "You won")
+            
+            
+        }
+        else {
+            
+            // if yes, check if there is time left
+            if miliseconds > 0 {
+                return
+                
+            } else {
+                
+                showAlert("Lost", "Try again")
+            }
+
+       
+        }
+        
+        
+        
+    }
+    
+    func showAlert(_ title:String, _ message:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(alertAction)
+        self.present(alert, animated: true, completion: nil)
     }
 
 
