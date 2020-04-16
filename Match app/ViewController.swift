@@ -20,7 +20,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var firstFlippedCardIndex:IndexPath?
     
     var timer:Timer?
-    var miliseconds:Float = 100000 // 100 seconds
+    var miliseconds:Float = 50000 // 100 seconds
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +83,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         
-       let selectedCell = collectionView.cellForItem(at: indexPath) as! MyCollectionViewCell
+        let selectedCell = collectionView.cellForItem(at: indexPath) as! MyCollectionViewCell
         
         let selectedCard = cardArray[indexPath.row]
         
@@ -201,9 +201,22 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func showAlert(_ title:String, _ message:String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let alertAction = UIAlertAction(title: "Restart", style: .default) { (restart) in
+            self.restart()
+        }
         alert.addAction(alertAction)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func restart() {
+        cardArray = [Card]()
+        cardArray = model.getCards()
+        miliseconds = 50000
+        SoundManager.playSound(.shuffle)
+        timerLabel.textColor = UIColor.black
+        collectionView.reloadData()
+        timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(timerElapsed), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer!, forMode: .common)
     }
 
 

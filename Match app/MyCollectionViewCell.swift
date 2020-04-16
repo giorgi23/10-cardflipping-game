@@ -14,11 +14,9 @@ class MyCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var backImageView: UIImageView!
     
-    //var card:Card?
     
     func setCard(_ card:Card) {
         
-        //self.card = card
         
         if card.isMatched == true {
             
